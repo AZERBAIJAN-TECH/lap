@@ -11,5 +11,6 @@
 #include "lib/timer/timer.h"
 #include "lib/keyboard/keyboard.h"
 #include "lib/com/com.h"
+#include "lib/string/string.h"
 
 #endif

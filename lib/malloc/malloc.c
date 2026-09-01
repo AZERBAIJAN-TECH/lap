@@ -63,31 +63,6 @@ void *malloc(size_t size) {
     return (void*)(block + 1);
 }
 
-void *memset(void *dst, int c, size_t n) {
-    unsigned char *p = (unsigned char *)dst;
-    unsigned char v = (unsigned char)c;
-
-    while (n && ((uintptr_t)p & (sizeof(uint32_t) - 1))) {
-        *p++ = v;
-        n--;
-    }
-
-    uint32_t word = v | (v << 8) | (v << 16) | (v << 24);
-    uint32_t *wp = (uint32_t *)p;
-
-    while (n >= sizeof(uint32_t)) {
-        *wp++ = word;
-        n -= sizeof(uint32_t);
-    }
-
-    p = (unsigned char *)wp;
-    while (n--) {
-        *p++ = v;
-    }
-
-    return dst;
-}
-
 void free(void *ptr) {
     if (!ptr) return;
     block_header_t *block = (block_header_t*)ptr - 1;
