@@ -14,8 +14,8 @@ static inline uint8_t inb(uint16_t port) {
 static inline void io_wait(void) {
     asm volatile ("outb %%al, $0x80" : : "a"(0));
 }
-int vga_getmaxcol(int *col);
-int vga_getmaxrow(int *row);
+int vga_getmaxcol();
+int vga_getmaxrow();
 int vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char *video);
 int vga_clearscreen(uint8_t color, volatile char *video);
 int vga_clearrow(int row, uint8_t color, volatile char* video);

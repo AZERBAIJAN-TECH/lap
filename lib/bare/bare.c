@@ -3,21 +3,17 @@
 #define VGA_CTRL_PORT 0x3D4
 #define VGA_DATA_PORT 0x3D5
 
-int vga_getmaxcol(int *col) {
+int vga_getmaxcol() {
     volatile uint16_t *vgacol_addr = (volatile uint16_t*)0x44A;
-    *col = *vgacol_addr;
-    return 0;
+    return *vgacol_addr;
 }
-int vga_getmaxrow(int *row) {
+int vga_getmaxrow() {
     volatile uint8_t *vgarow_addr = (volatile uint8_t*)0x484;
-    *row = *vgarow_addr + 1;
-    return 0;
+    return *vgarow_addr + 1;
 }
 int vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char *video) {
-    int col_max = 0;
-    int row_max = 0;
-    vga_getmaxrow(&row_max);
-    vga_getmaxcol(&col_max);
+    int col_max = vga_getmaxcol();;
+    int row_max = vga_getmaxrow();;
     int pos = row * col_max + col;
     for (int i = 0; msg[i] != '\0'; i++) {
         if (pos + i >= row_max * col_max) {
@@ -29,10 +25,8 @@ int vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char 
     return 0;
 }
 int vga_clearscreen(uint8_t color, volatile char *video) {
-    int col_max = 0;
-    int row_max = 0;
-    vga_getmaxcol(&col_max);
-    vga_getmaxrow(&row_max);
+    int col_max = vga_getmaxcol();
+    int row_max = vga_getmaxrow();
     for (int i = 0; i != row_max; i++){
         for (int j = 0; j != col_max; j++) {
             int ofs = (i * col_max + j) * 2;
@@ -44,8 +38,7 @@ int vga_clearscreen(uint8_t color, volatile char *video) {
 }
 
 int vga_clearrow(int row, uint8_t color, volatile char* video) {
-    int col_max = 0;
-    vga_getmaxcol(&col_max);
+    int col_max = vga_getmaxcol();
     for (int i = 0; i != col_max; i++) {
         int ofs = (row * col_max + i) * 2;
         video[ofs]     = ' ';

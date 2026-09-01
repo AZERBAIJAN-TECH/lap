@@ -11,10 +11,8 @@ void kmain(void) {
     keyboard_init();
     __asm__ volatile ("sti");
     char *video = (char *) 0xB8000;
-    int maxcol = 0;
-    int maxrow = 0;
-    vga_getmaxcol(&maxcol);
-    vga_getmaxrow(&maxrow);
+    int maxcol = vga_getmaxcol();
+    int maxrow = vga_getmaxrow();
     vga_clearscreen(0x0F, video);
     vga_clearrow(0, 0x1F, video);
     vga_clearrow(1, 0x1F, video);
