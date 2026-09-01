@@ -1,7 +1,7 @@
 #include "lclib.h"
 #include "lib/bare/bare.h"
 #include "lib/keyboard/keyboard.h"
-int soundbool = 1;
+int soundbool = 0;
 
 
 void kmain(void) {
@@ -36,10 +36,11 @@ void kmain(void) {
         sound_stop();
     }
     int posrow = 3;
-    int poscol = 0;
+    int poscol = 2;
     char cbuf[256] = {0};
     int len = 0;
     vga_rputsat("            ", 0x1F, 0, maxcol/2-6, video);
+    vga_rputsat(">", 0x0F, posrow, 0, video);
     for (;;) {
         if (posrow == maxrow) {
             for (int i = 2; i <= maxrow; i++) {
@@ -65,8 +66,10 @@ void kmain(void) {
 
         if (c) {
             if (c == '\b') {
-                poscol--;
-                cbuf[len--] = 0;
+                if (poscol > 2 && poscol <= maxcol) {
+                    poscol--;
+                    cbuf[len--] = 0;
+                }
                 char buf[2] = {' ', '\0'};
                 vga_rputsat(buf, 0x0F, posrow, poscol, video);
                 continue;
@@ -74,7 +77,8 @@ void kmain(void) {
 
             if (c == '\n') {
                 posrow++;
-                poscol = 0;
+                poscol = 2;
+                vga_rputsat(">", 0x0F, posrow, 0, video);
                 cbuf[len] = '\0';
                 vga_clearrow(2, 0x1F, video);
                 vga_rputsat(cbuf, 0x1F, 2, maxcol/2-(len/2), video);
