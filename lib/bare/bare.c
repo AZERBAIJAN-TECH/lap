@@ -11,7 +11,7 @@ int vga_getmaxrow() {
     volatile uint8_t *vgarow_addr = (volatile uint8_t*)0x484;
     return *vgarow_addr + 1;
 }
-int vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char *video) {
+void vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char *video) {
     int col_max = vga_getmaxcol();;
     int row_max = vga_getmaxrow();;
     int pos = row * col_max + col;
@@ -22,9 +22,9 @@ int vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char 
         video[(pos + i) * 2] = msg[i];
         video[(pos + i) * 2 + 1] = color;
     }
-    return 0;
+    return;
 }
-int vga_clearscreen(uint8_t color, volatile char *video) {
+void vga_clearscreen(uint8_t color, volatile char *video) {
     int col_max = vga_getmaxcol();
     int row_max = vga_getmaxrow();
     for (int i = 0; i != row_max; i++){
@@ -34,17 +34,17 @@ int vga_clearscreen(uint8_t color, volatile char *video) {
             video[ofs + 1] = color;
         }
     }
-    return 0;
+    return;
 }
 
-int vga_clearrow(int row, uint8_t color, volatile char* video) {
+void vga_clearrow(int row, uint8_t color, volatile char* video) {
     int col_max = vga_getmaxcol();
     for (int i = 0; i != col_max; i++) {
         int ofs = (row * col_max + i) * 2;
         video[ofs]     = ' ';
         video[ofs + 1] = color;
     }
-    return 0;
+    return;
 }
 
 void vga_set_cursor(int row, int col, int maxcol) {

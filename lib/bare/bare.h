@@ -16,8 +16,8 @@ static inline void io_wait(void) {
 }
 int vga_getmaxcol();
 int vga_getmaxrow();
-int vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char *video);
-int vga_clearscreen(uint8_t color, volatile char *video);
-int vga_clearrow(int row, uint8_t color, volatile char* video);
+void vga_rputsat(const char *msg, uint8_t color, int row, int col, volatile char *video);
+void vga_clearscreen(uint8_t color, volatile char *video);
+void vga_clearrow(int row, uint8_t color, volatile char* video);
 void vga_set_cursor(int row, int col, int maxcol);
 #endif
