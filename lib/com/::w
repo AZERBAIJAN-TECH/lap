@@ -1,0 +1,49 @@
+#include "com.h"
+#include "../bare/bare.h"
+
+struct pCom list[10] = { .functype = INT, .func.intfunc = {"clear", vga_clearrow}, argv = 3};
+
+void parse_command(const char *mBuff) {
+    char sBuff[256];
+    size_t mSize = sizeof(mBuff) / sizeof(char);
+    int argv = 0;
+    char *argc[];
+
+    //TODO: parse argv and argc in pCom
+
+
+    //parsing mBuff to get name
+    for(int i = 0; i < mSize; i++) {
+        if(mBuff[i] == ' ') {
+            sBuff[i] = '\0';
+            break;
+        }
+
+        sBuff[i] = mBuff[i];
+    }
+
+    //argv
+    for(int i = 0; i < mSize; i++) {
+        if(mBuff[i] == ' ') {
+            argv += 1;
+            do {
+                argc[argv] + mBuff[i];
+                i++;
+            } while(mBuff[i+1] != ' ');
+        }
+    }
+
+
+
+    //paring name of funcion and call it
+    for(int i = 0; i < 10; i++) {
+        if (list[i].funcrype == INT) {
+            if(list[i].func.intfunc.name == sBuff) {
+                .func.intfunc.func(Ж)
+            }
+        }
+        else {
+        
+        }
+    }
+}
