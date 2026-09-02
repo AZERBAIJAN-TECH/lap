@@ -1,7 +1,4 @@
 #include "lclib.h"
-#include "lib/bare/bare.h"
-#include "lib/com/com.h"
-#include "lib/keyboard/keyboard.h"
 int soundbool = 0;
 
 
@@ -17,8 +14,6 @@ void kmain(void) {
     vga_clearscreen(0x0F, video);
     vga_clearrow(0, 0x1F, video);
     vga_clearrow(1, 0x1F, video);
-    vga_clearrow(2, 0x1F, video);
-    vga_rputsat("initializing", 0x1F, 0, maxcol/2-6, video);
     vga_rputsat("lap", 0x1F, 0, 0, video);
     vga_rputsat("32bit", 0x1F, 0, maxcol-5, video);
     vga_drawhline("-", 0x1F, 1, 0, maxcol/2-5, video);
@@ -34,11 +29,10 @@ void kmain(void) {
         }
         sound_stop();
     }
-    int posrow = 3;
-    int poscol = 2;
+    posrow = 3;
+    poscol = 2;
     char cbuf[256] = {0};
     int len = 0;
-    vga_rputsat("            ", 0x1F, 0, maxcol/2-6, video);
     vga_rputsat(">", 0x0F, posrow, 0, video);
     for (;;) {
         if (posrow == maxrow) {

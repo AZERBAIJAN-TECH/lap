@@ -3,7 +3,7 @@
 #include "../string/string.h"
 #include "../../cmd/cmds.h"
 
-struct com list[] = { {"clearrow", clearrow}, {"clearscreen", clearscreen} };
+struct com list[] = { {"clear", clear}, {"clearrow", clearrow}, {"clearscreen", clearscreen} };
 
 void tryParseCommand(const char *mBuff) {
     char sBuff[256];
@@ -43,9 +43,11 @@ void tryParseCommand(const char *mBuff) {
     }
 
     //paring name of funcion and call it
-    for(int i = 0; i < 10; i++) {
-        if(strcmp(list[i].name, sBuff) == 0) {
+    size_t listLen = sizeof(list) / sizeof(list[0]);
+    for (size_t i = 0; i < listLen; i++) {
+        if (strcmp(list[i].name, sBuff) == 0) {
             list[i].function(argv, argc);
+            break;
         }
     }
 }
