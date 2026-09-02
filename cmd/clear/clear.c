@@ -11,10 +11,8 @@ int clear(int argv, char *argc[]) {
     vga_clearrow(1, 0x1F, video);
     vga_rputsat("lap", 0x1F, 0, 0, video);
     vga_rputsat("32bit", 0x1F, 0, maxcol-5, video);
-    vga_drawhline("-", 0x1F, 1, 0, maxcol/2-5, video);
-    vga_drawhline("-", 0x1F, 1, maxcol/2+4, maxcol, video);
-    vga_rputsat("text edit", 0x1F, 1, maxcol/2-5, video);
-    vga_rputsat(">", 0x0F, 3, 0, video);
+    vga_drawhline("-", 0x1F, 1, 0, maxcol, video);
+    vga_rputsat("cmd", 0x1F, 1, maxcol/2-2, video);
     posrow = 3;
     poscol = 2;
     return 0;

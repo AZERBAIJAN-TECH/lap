@@ -16,9 +16,8 @@ void kmain(void) {
     vga_clearrow(1, 0x1F, video);
     vga_rputsat("lap", 0x1F, 0, 0, video);
     vga_rputsat("32bit", 0x1F, 0, maxcol-5, video);
-    vga_drawhline("-", 0x1F, 1, 0, maxcol/2-5, video);
-    vga_drawhline("-", 0x1F, 1, maxcol/2+4, maxcol, video);
-    vga_rputsat("text edit", 0x1F, 1, maxcol/2-5, video);
+    vga_drawhline("-", 0x1F, 1, 0, maxcol, video);
+    vga_rputsat("cmd", 0x1F, 1, maxcol/2-2, video);
     if (soundbool) {
         int hz = 100.0;
         for (int i = 0; i <= 4; i++) {

@@ -2,6 +2,7 @@
 #include "../bare/bare.h"
 #include "../string/string.h"
 #include "../../cmd/cmds.h"
+#include "../print/print.h"
 
 struct com list[] = { {"echo", echo}, {"clear", clear}, {"clearrow", clearrow}, {"clearscreen", clearscreen} };
 
@@ -56,10 +57,15 @@ void tryParseCommand(const char *mBuff) {
 
     //paring name of funcion and call it
     size_t listLen = sizeof(list) / sizeof(list[0]);
+    int found = 0;
     for (size_t i = 0; i < listLen; i++) {
         if (strcmp(list[i].name, sBuff) == 0) {
             list[i].function(argv, argc);
+            found = 1;
             break;
         }
+    }
+    if (!found) {
+        print("not found");
     }
 }
