@@ -18,4 +18,5 @@ int clearscreen(int argv, char *argc[]) {
     }
     char *video = (char *) 0xB8000;
     vga_clearscreen(hextoi(argc[0]), video);
+    return 0;
 }

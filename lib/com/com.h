@@ -1,24 +1,11 @@
 #ifndef COM_H
 #define COM_H
 
-enum type {VOID, INT};
+typedef int (*func) (int argv, char *argc[]);
 
-typedef int (*intFunc) (int argv, char *argc[]);
-
-union com {
-    struct {
-        const char *name;
-        void (*func)();    
-    } voidfunc;
-    struct {
-        const char *name;
-        intFunc func;
-    } intfunc;
-};
-
-struct pCom {
-    enum type funcType;
-    union com funcData;
+struct com {
+    const char *name;
+    func function;
 };
 
 void tryParseCommand(const char *mBuff);

@@ -3,7 +3,7 @@
 #include "../string/string.h"
 #include "../../cmd/cmds.h"
 
-struct pCom list[10] = { { .funcType = INT, .funcData.intfunc = {"clear", clear}}, { .funcType = INT, .funcData.intfunc = {"clearscreen", clearscreen}}  };
+struct com list[] = { {"clear", clear}, {"clearscreen", clearscreen} };
 
 void tryParseCommand(const char *mBuff) {
     char sBuff[256];
@@ -44,10 +44,8 @@ void tryParseCommand(const char *mBuff) {
 
     //paring name of funcion and call it
     for(int i = 0; i < 10; i++) {
-        if (list[i].funcType == INT) {
-            if(strcmp(list[i].funcData.intfunc.name, sBuff) == 0) {
-                list[i].funcData.intfunc.func(argv, argc);
-            }
+        if(strcmp(list[i].name, sBuff) == 0) {
+            list[i].function(argv, argc);
         }
     }
 }
