@@ -49,3 +49,25 @@ int atoi(const char *s) {
 
         return result * sign;
 }
+int hextoi(const char *s) {
+    int result = 0;
+    if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) {
+        s += 2;
+    }
+    while (*s) {
+        char c = *s;
+        int digit;
+        if (c >= '0' && c <= '9') {
+            digit = c - '0';
+        } else if (c >= 'a' && c <= 'f') {
+            digit = c - 'a' + 10;
+        } else if (c >= 'A' && c <= 'F') {
+            digit = c - 'A' + 10;
+        } else {
+            break;
+        }
+        result = result * 16 + digit;
+        s++;
+    }
+    return result;
+}

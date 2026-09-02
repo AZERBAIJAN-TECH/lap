@@ -1,17 +1,7 @@
 #include "com.h"
 #include "../bare/bare.h"
 #include "../string/string.h"
-
-int clear(int argv, char *argc[]) {
-    if (argv < 1) {
-        return 0;
-    }
-    char *video = (char *) 0xB8000;
-    int row = atoi(argc[0]);
-    int color = atoi(argc[1]);
-
-    vga_clearrow(row, color, video);
-}
+#include "../../cmd/cmds.h"
 
 struct pCom list[10] = { { .funcType = INT, .funcData.intfunc = {"clear", clear}} };
 
@@ -35,19 +25,21 @@ void tryParseCommand(const char *mBuff) {
     sBuff[i] = '\0';
 
     //argv
-    for(size_t i = 0; i < mSize; i++) {
-        if(mBuff[i] == ' ') {
-            i++;
-            while(i < mSize && mBuff[i] != ' ') {
-                argbuff[argv][charIdx] = mBuff[i];
-                i++;
-                charIdx++;
-            }
-            argbuff[argv][charIdx] = '\0';
-            argc[argv] = argbuff[argv];
-            argv++;
-            charIdx = 0;
+    size_t j = 1;
+    while (j < mSize) {
+        if (mBuff[j] == ' ') {
+            j++;
+            continue;
         }
+        while (j < mSize && mBuff[j] != ' ') {
+            argbuff[argv][charIdx] = mBuff[j];
+            charIdx++;
+            j++;
+        }
+        argbuff[argv][charIdx] = '\0';
+        argc[argv] = argbuff[argv];
+        argv++;
+        charIdx = 0;
     }
 
     //paring name of funcion and call it

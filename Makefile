@@ -14,9 +14,7 @@ LDFLAGS = -m elf_i386 -T linker.ld
 
 BUILD = build
 
-# рекурсивный поиск .c: корень + все lib/*/*.c — новый модуль в
-# lib/<name>/ подхватывается сам, без правки Makefile
-CSRCS = $(wildcard *.c) $(wildcard lib/*/*.c)
+CSRCS = $(wildcard *.c) $(wildcard lib/*/*.c) $(wildcard cmd/*/*.c)
 COBJS = $(patsubst %.c,$(BUILD)/%.o,$(CSRCS))
 CDEPS = $(COBJS:.o=.d)
 
