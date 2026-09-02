@@ -21,5 +21,5 @@ struct pCom {
     union com funcData;
 };
 
-void parse_command(const char *mBuff);
+void tryParseCommand(const char *mBuff);
 #endif

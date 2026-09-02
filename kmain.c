@@ -1,5 +1,6 @@
 #include "lclib.h"
 #include "lib/bare/bare.h"
+#include "lib/com/com.h"
 #include "lib/keyboard/keyboard.h"
 int soundbool = 0;
 
@@ -78,6 +79,7 @@ void kmain(void) {
                 poscol = 2;
                 vga_rputsat(">", 0x0F, posrow, 0, video);
                 cbuf[len] = '\0';
+                tryParseCommand(cbuf);
                 vga_clearrow(2, 0x1F, video);
                 vga_rputsat(cbuf, 0x1F, 2, maxcol/2-(len/2), video);
                 memset(cbuf, 0, sizeof(cbuf));

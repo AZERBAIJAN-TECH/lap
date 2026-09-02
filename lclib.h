@@ -12,5 +12,6 @@
 #include "lib/keyboard/keyboard.h"
 #include "lib/com/com.h"
 #include "lib/string/string.h"
+#include "lib/com/com.h"
 
 #endif

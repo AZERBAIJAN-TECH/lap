@@ -17,7 +17,7 @@ struct pCom list[10] = { { .funcType = INT, .funcData.intfunc = {"clear", clear}
 
 void tryParseCommand(const char *mBuff) {
     char sBuff[256];
-    size_t mSize = sizeof(mBuff) / sizeof(char);
+    size_t mSize = strlen(mBuff);
     int argv = 0;
     char argbuff[16][256];
     char *argc[16];
@@ -25,26 +25,27 @@ void tryParseCommand(const char *mBuff) {
     int charIdx = 0;
 
     //parsing mBuff to get name
-    for(size_t i = 0; i < mSize; i++) {
+    size_t i;
+    for(i = 0; i < mSize; i++) {
         if(mBuff[i] == ' ') {
-            sBuff[i] = '\0';
             break;
         }
-
         sBuff[i] = mBuff[i];
     }
+    sBuff[i] = '\0';
 
     //argv
     for(size_t i = 0; i < mSize; i++) {
         if(mBuff[i] == ' ') {
-            argv += 1;
             i++;
-            do {
+            while(i < mSize && mBuff[i] != ' ') {
                 argbuff[argv][charIdx] = mBuff[i];
                 i++;
                 charIdx++;
-            } while(mBuff[i+1] != ' ' && mBuff[i+1] != '\0');
+            }
+            argbuff[argv][charIdx] = '\0';
             argc[argv] = argbuff[argv];
+            argv++;
             charIdx = 0;
         }
     }
@@ -52,7 +53,7 @@ void tryParseCommand(const char *mBuff) {
     //paring name of funcion and call it
     for(int i = 0; i < 10; i++) {
         if (list[i].funcType == INT) {
-            if(strcmp(list[i].funcData.intfunc.name, sBuff)) {
+            if(strcmp(list[i].funcData.intfunc.name, sBuff) == 0) {
                 list[i].funcData.intfunc.func(argv, argc);
             }
         }
