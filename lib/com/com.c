@@ -31,10 +31,22 @@ void tryParseCommand(const char *mBuff) {
             j++;
             continue;
         }
-        while (j < mSize && mBuff[j] != ' ') {
-            argbuff[argv][charIdx] = mBuff[j];
-            charIdx++;
+        if (mBuff[j] == '"') {
             j++;
+            while (j < mSize && mBuff[j] != '"') {
+                argbuff[argv][charIdx] = mBuff[j];
+                charIdx++;
+                j++;
+            }
+            if (j < mSize) {
+                j++;
+            }
+        } else {
+            while (j < mSize && mBuff[j] != ' ') {
+                argbuff[argv][charIdx] = mBuff[j];
+                charIdx++;
+                j++;
+            }
         }
         argbuff[argv][charIdx] = '\0';
         argc[argv] = argbuff[argv];

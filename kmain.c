@@ -42,6 +42,7 @@ void kmain(void) {
             posrow = 3;
         }
 
+        ensure_row_bounds();
         if (poscol == maxcol) {
             posrow++;
             poscol = 0;

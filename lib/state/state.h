@@ -3,5 +3,6 @@
 
 extern int posrow;
 extern int poscol;
+void ensure_row_bounds(void);
 
 #endif
