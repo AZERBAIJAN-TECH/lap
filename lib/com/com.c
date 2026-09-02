@@ -3,7 +3,7 @@
 #include "../string/string.h"
 #include "../../cmd/cmds.h"
 
-struct com list[] = { {"clear", clear}, {"clearrow", clearrow}, {"clearscreen", clearscreen} };
+struct com list[] = { {"echo", echo}, {"clear", clear}, {"clearrow", clearrow}, {"clearscreen", clearscreen} };
 
 void tryParseCommand(const char *mBuff) {
     char sBuff[256];

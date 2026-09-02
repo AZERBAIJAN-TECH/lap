@@ -6,7 +6,6 @@ int clear(int argv, char *argc[]) {
     char *video = (char *) 0xB8000;
     int maxcol = vga_getmaxcol();
     int maxrow = vga_getmaxrow();
-
     vga_clearscreen(0x0F, video);
     vga_clearrow(0, 0x1F, video);
     vga_clearrow(1, 0x1F, video);

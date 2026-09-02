@@ -71,11 +71,11 @@ void kmain(void) {
             if (c == '\n') {
                 posrow++;
                 poscol = 2;
-                vga_rputsat(">", 0x0F, posrow, 0, video);
                 cbuf[len] = '\0';
                 tryParseCommand(cbuf);
                 memset(cbuf, 0, sizeof(cbuf));
                 len = 0;
+                vga_rputsat(">", 0x0F, posrow, 0, video);
                 continue;
             }
 
