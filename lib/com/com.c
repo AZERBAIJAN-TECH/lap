@@ -25,7 +25,7 @@ void tryParseCommand(const char *mBuff) {
     sBuff[i] = '\0';
 
     //argv
-    size_t j = 1;
+    size_t j = i;
     while (j < mSize) {
         if (mBuff[j] == ' ') {
             j++;
