@@ -1,7 +1,7 @@
 #include "../../lib/bare/bare.h"
 #include "../../lib/string/string.h"
 
-int clear(int argv, char *argc[]) {
+int clearrow(int argv, char *argc[]) {
     if (argv < 2) {
         return 1;
     }

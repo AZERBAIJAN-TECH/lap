@@ -80,10 +80,18 @@ void kmain(void) {
                 vga_rputsat(">", 0x0F, posrow, 0, video);
                 cbuf[len] = '\0';
                 tryParseCommand(cbuf);
-                vga_clearrow(2, 0x1F, video);
-                vga_rputsat(cbuf, 0x1F, 2, maxcol/2-(len/2), video);
                 memset(cbuf, 0, sizeof(cbuf));
                 len = 0;
+                continue;
+            }
+
+            if (c == '\t') {
+                for (int i = 0; i != 2; i++) {
+                    cbuf[len++] = ' ';
+                    char buf[2] = {' ', '\0'};
+                    vga_rputsat(buf, 0x0F, posrow, poscol, video);
+                    poscol++;
+                }
                 continue;
             }
             cbuf[len++] = c;
