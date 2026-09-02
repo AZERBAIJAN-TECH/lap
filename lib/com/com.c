@@ -3,7 +3,7 @@
 #include "../string/string.h"
 #include "../../cmd/cmds.h"
 
-struct pCom list[10] = { { .funcType = INT, .funcData.intfunc = {"clear", clear}} };
+struct pCom list[10] = { { .funcType = INT, .funcData.intfunc = {"clear", clear}}, { .funcType = INT, .funcData.intfunc = {"clearscreen", clearscreen}}  };
 
 void tryParseCommand(const char *mBuff) {
     char sBuff[256];
