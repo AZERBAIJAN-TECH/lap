@@ -14,5 +14,6 @@
 #include "lib/string/string.h"
 #include "lib/com/com.h"
 #include "lib/state/state.h"
+#include "lib/vid/fb_info.h"
 
 #endif

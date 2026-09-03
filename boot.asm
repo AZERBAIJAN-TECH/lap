@@ -78,32 +78,29 @@ load_gdt:
     ret
 
 gdt_start:
-    dq 0x0000000000000000      ; null descriptor
-
-gdt_code:
-    dw 0xFFFF       ; limit low
-    dw 0x0000       ; base low
-    db 0x00         ; base middle
-    db 10011010b    ; access: present, ring0, code, executable, readable
-    db 11001111b    ; flags + limit high (4K granularity, 32-bit)
-    db 0x00         ; base high
-
-gdt_data:
-    dw 0xFFFF
-    dw 0x0000
-    db 0x00
-    db 10010010b    ; access: present, ring0, data, writable
-    db 11001111b
-    db 0x00
-
+    dq 0x0000000000000000      ; null, 0x00
+gdt_code32:
+    dw 0xFFFF, 0x0000
+    db 0x00, 10011010b, 11001111b, 0x00   ; 0x08
+gdt_data32:
+    dw 0xFFFF, 0x0000
+    db 0x00, 10010010b, 11001111b, 0x00   ; 0x10
+gdt_code16:
+    dw 0xFFFF, 0x0000
+    db 0x00, 10011010b, 00001111b, 0x00   ; 0x18
+gdt_data16:
+    dw 0xFFFF, 0x0000
+    db 0x00, 10010010b, 00001111b, 0x00   ; 0x20
 gdt_end:
 
 gdt_descriptor:
     dw gdt_end - gdt_start - 1
     dd gdt_start
 
-CODE_SEG equ gdt_code - gdt_start
-DATA_SEG equ gdt_data - gdt_start
+CODE_SEG   equ gdt_code32 - gdt_start
+DATA_SEG   equ gdt_data32 - gdt_start
+CODE16_SEG equ gdt_code16 - gdt_start
+DATA16_SEG equ gdt_data16 - gdt_start
 
 ; ---------- 32-bit protected mode ----------
 BITS 32

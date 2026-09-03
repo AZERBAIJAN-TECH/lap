@@ -4,7 +4,7 @@
 #include "../../cmd/cmds.h"
 #include "../print/print.h"
 
-struct com list[] = { {"echo", echo}, {"clear", clear}, {"clearrow", clearrow}, {"clearscreen", clearscreen} };
+struct com list[] = { {"video", video}, {"echo", echo}, {"clear", clear}, {"clearrow", clearrow}, {"clearscreen", clearscreen} };
 
 void tryParseCommand(const char *mBuff) {
     char sBuff[256];

@@ -16,7 +16,7 @@ struct idt_ptr {
 static struct idt_entry idt[256];
 static struct idt_ptr   idtp;
 
-extern void idt_load(uint32_t idtp_addr);
+void idt_load(uint32_t idtp_addr);
 
 void idt_set_gate(int n, uint32_t handler, uint16_t sel, uint8_t flags) {
     idt[n].base_low  = (uint16_t)(handler & 0xFFFF);

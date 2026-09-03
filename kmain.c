@@ -1,6 +1,6 @@
 #include "lclib.h"
-int soundbool = 0;
 
+int soundbool = 0;
 
 void kmain(void) {
     idt_install();

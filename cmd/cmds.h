@@ -3,4 +3,5 @@
 
 #include "clear/clear.h"
 #include "echo/echo.h"
+#include "video/video.h"
 #endif
