@@ -15,5 +15,6 @@
 #include "lib/com/com.h"
 #include "lib/state/state.h"
 #include "lib/vid/fb_info.h"
+#include "lib/graphic/graphic.h"
 
 #endif
